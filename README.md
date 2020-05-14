@@ -1,1 +1,17 @@
-# Employee-Management-System
+# **Employee-Management-System**
+
+## **Objective**
+
+
+
+## **Requirements**
+
+
+
+## **Description**
+
+
+
+## **Outcome**
+
+
