@@ -10,8 +10,6 @@ In this homework assignment, my challenge was to architect and build a solution 
 
 Design the following database schema containing three tables:
 
-![Database Schema](Assets/schema.png)
-
 * **department**:
 
   * **id** - INT PRIMARY KEY
