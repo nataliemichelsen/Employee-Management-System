@@ -6,15 +6,24 @@ CREATE DATABASE CMS;
 USE CMS;
 
 -- // define tables 
-CREATE TABLE department ()
-name VARCHAR(30) to hold department name
-PRIMARY KEY (id)
+CREATE TABLE department (
+    -- // to hold department name
+    name VARCHAR(30) 
+    PRIMARY KEY (id)
+);
 
-CREATE TABLE role ()
-title - VARCHAR(30) to hold role title
-salary - DECIMAL to hold role salary
-department_id - INT to hold reference to department role belongs to
-PRIMARY KEY (id)
+
+
+CREATE TABLE role (
+    -- // to hold role title
+    title VARCHAR(30),
+    -- // to hold role salary
+    salary DECIMAL,
+    -- // to hold reference to department role belongs to
+    department_id INT,
+    PRIMARY KEY (id)
+);
+
 
 CREATE TABLE employee (
     -- // to hold employee first name

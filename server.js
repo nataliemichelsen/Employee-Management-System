@@ -1,6 +1,36 @@
-// remove what is not necessary
-// add anything that is necessary / change wherever necessary
+// require
+const mysql = require("mysql");
+const path = require("path");
+const fs = require("fs");
 
+// 
+
+
+
+
+
+
+// 
+const questions = [
+    {
+        type: 'list',
+        message: 'What type of employee are you?',
+        choices: ['Manager', 'Intern', 'Engineer'],
+        name: 'role',
+    },
+    {
+        message: 'What is your name?',
+        name: 'name'
+    },
+    {
+        message: 'What is your employee ID?',
+        name: 'id'
+    },
+    {
+        message: 'What is your email?',
+        name: 'email'
+    }
+]
 
 
 
