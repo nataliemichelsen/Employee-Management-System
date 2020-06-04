@@ -1,7 +1,7 @@
 -- // remove if existing
 DROP DATABASE IF EXISTS CMS;
 
--- // create database 
+-- // create & use database 
 CREATE DATABASE CMS;
 USE CMS;
 
