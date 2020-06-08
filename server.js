@@ -20,7 +20,6 @@ const actions = [
     },
 ]
 
-
 // define const that holds all management options
 const viewAllEmployees = [
     {
@@ -145,13 +144,13 @@ const removeEmployee = [
 // initializing the inquirer prompt for the starting question
 // using an if statement for fs - to render and write to file
 const init = async () => {
-    const { newEmployee } = await inquirer.prompt({
+    const { actions } = await inquirer.prompt({
         type: 'confirm',
         message: ' ?',
         name: ' '
     })
 
-    if ( newEmployee ) {
+    if ( actions ) {
         initEmployee();
     } else {
         if (employees.length > 0) {
