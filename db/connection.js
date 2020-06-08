@@ -14,10 +14,11 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     // run the start function after the connection is made to prompt the user
+    console.log()
     start();
   });
 
-function emsConnection() {
+function start() {
   connection.query("SELECT  FROM ", function(err, res) {
     if (err) throw err;
 

@@ -3,29 +3,89 @@ const mysql = require("mysql");
 const path = require("path");
 const fs = require("fs");
 
-// 
+// define possible actions to take
+const actions = [
+    {
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: [ 'View All Employees', 
+        'View All Employees by Department', 
+        'View All Employees by Manager', 
+        'Add Employee', 
+        'Update Employee', 
+        'Update Employee Roles', 
+        'Update Employee Manager', 
+        'Remove Employee' ],
+        name: 'actions',
+    },
+]
 
 
 // define const that holds all management options
-const questions = [
+const viewAllEmployees = [
     {
         type: 'list',
-        message: 'What type of employee are you?',
+        message: 'You are viewing all employees.',
+    },
+]
+const viewByDepartment = [
+    {
+        type: 'list',
+        message: 'You are viewing all employees by department.',
+    },
+]
+const viewByRole = [
+    {
+        type: 'list',
+        message: 'You are viewing all employees by role.',
+    },
+]
+const addEmployee = [
+    {
+        type: '',
+        message: '?',
         choices: ['Manager', 'Intern', 'Engineer'],
         name: 'role',
     },
+]
+const addDepartments = [
     {
-        message: 'What is your name?',
-        name: 'name'
+        type: '',
+        message: '?',
+        choices: ['Manager', 'Intern', 'Engineer'],
+        name: 'role',
     },
+]
+const updateEmployee = [
     {
-        message: 'What is your employee ID?',
-        name: 'id'
+        type: '',
+        message: '?',
+        choices: ['Manager', 'Intern', 'Engineer'],
+        name: 'role',
     },
+]
+const updateEmployeeRoll = [
     {
-        message: 'What is your email?',
-        name: 'email'
-    }
+        type: '',
+        message: '?',
+        choices: ['Manager', 'Intern', 'Engineer'],
+        name: 'role',
+    },
+]
+const updateEmployeeDepartment = [
+    {
+        type: '',
+        message: '?',
+        choices: ['Manager', 'Intern', 'Engineer'],
+        name: 'role',
+    },
+]
+const removeEmployee = [
+    {
+        type: '',
+        message: 'Employee removed from database.',
+        name: 'remove',
+    },
 ]
 
 // initializing the inquirer prompt for the starting question
