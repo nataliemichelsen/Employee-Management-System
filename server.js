@@ -37,54 +37,108 @@ const viewByDepartment = [
 const viewByRole = [
     {
         type: 'list',
+        choices: [ 'Leader - 1', 'Assistant - 2', 'Team Member - 3', 'Manager - 4', 'Assistant Manager - 5' ],
+        message: 'You are viewing all employees by role.',
+    },
+]
+const viewByManager = [
+    {
+        type: 'list',
+        choices: [ 'Jackie Brown', 'Clarice Starling', 'Dorothy Gale', 'Scarlett O`Hara' ],
         message: 'You are viewing all employees by role.',
     },
 ]
 const addEmployee = [
     {
-        type: '',
-        message: '?',
-        choices: ['Manager', 'Intern', 'Engineer'],
-        name: 'role',
+        type: 'input',
+        message: 'What is the first name of the employee you want to add?',
+        name: 'first_name',
+    },
+    {
+        type: 'input',
+        message: 'What is the last name of the employee you want to add?',
+        name: 'last_name',
+    },
+    {
+        type: 'input',
+        message: 'What is the title of the employee you want to add?',
+        name: 'title',
+    },
+    {
+        type: 'list',
+        message: 'What is the role of the employee you want to add?',
+        choices: [ 'Leader - 1', 'Assistant - 2', 'Team Member - 3', 'Manager - 4', 'Assistant Manager - 5' ],
+        name: 'role_id',
+    },
+    {
+        type: 'list',
+        message: 'What is the department of the employee you want to add?',
+        choices: [ 'Sales', 'Service', 'Research', 'Janitorial' ],
+        name: 'department_id',
+    },
+    {
+        type: 'list',
+        message: 'Who is the manager of the employee you want to add?',
+        choices: [ 'Jackie Brown', 'Clarice Starling', 'Dorothy Gale', 'Scarlett O`Hara' ],
+        name: 'manager_id',
+    },
+    {
+        type: 'input',
+        message: 'What is the salary of the employee you want to add?',
+        name: 'salary',
     },
 ]
-const addDepartments = [
+const addDepartment = [
     {
-        type: '',
-        message: '?',
-        choices: ['Manager', 'Intern', 'Engineer'],
-        name: 'role',
+        type: 'input',
+        message: 'What new department would you like to add?',
+        name: 'addDepartment',
+    },
+]
+const addRole = [
+    {
+        type: 'input',
+        message: 'What new role would you like to add?',
+        name: 'addRole',
     },
 ]
 const updateEmployee = [
     {
-        type: '',
-        message: '?',
-        choices: ['Manager', 'Intern', 'Engineer'],
-        name: 'role',
+        type: 'list',
+        message: 'What would you like to update about this employee?',
+        choices: [ 'First Name', 'Last Name', 'Manager', 'Role', 'Department', ],
+        name: 'updateEmployee',
     },
 ]
-const updateEmployeeRoll = [
+const updateEmployeeRole = [
     {
-        type: '',
-        message: '?',
-        choices: ['Manager', 'Intern', 'Engineer'],
-        name: 'role',
+        type: 'list',
+        message: 'What role would you like this employee to have?',
+        choices: [ 'Leader - 1', 'Assistant - 2', 'Team Member - 3', 'Manager - 4', 'Assistant Manager - 5' ],
+        name: 'updateEmployeeRole',
     },
 ]
 const updateEmployeeDepartment = [
     {
-        type: '',
-        message: '?',
-        choices: ['Manager', 'Intern', 'Engineer'],
-        name: 'role',
+        type: 'list',
+        message: 'What department would you like this employee to have?',
+        choices: [ 'Sales', 'Service', 'Research', 'Janitorial' ],
+        name: 'updateEmployeeDepartment',
+    },
+]
+const updateEmployeeManager = [
+    {
+        type: 'list',
+        message: 'What manager would you like this employee to have?',
+        choices: [ 'Jackie Brown', 'Clarice Starling', 'Dorothy Gale', 'Scarlett O`Hara' ],
+        name: 'updateEmployeeManager',
     },
 ]
 const removeEmployee = [
     {
-        type: '',
+        type: 'list',
         message: 'Employee removed from database.',
-        name: 'remove',
+        name: 'removeEmployee',
     },
 ]
 
