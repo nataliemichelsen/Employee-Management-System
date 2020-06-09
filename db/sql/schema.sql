@@ -7,12 +7,14 @@ USE CMS;
 
 -- // define tables 
 CREATE TABLE department (
+    id INT auto_increment NOT NULL,
     -- // to hold department name
     department_name VARCHAR(14) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE role (
+    id INT auto_increment NOT NULL,
     -- // to hold role title
     title VARCHAR(14) NOT NULL,
     -- // to hold role salary
