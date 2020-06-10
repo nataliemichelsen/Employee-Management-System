@@ -5,6 +5,13 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const util = require("util");
 
+// to link to index.js
+const index = require("./index");
+// to link to server.js
+const questions = require("/server");
+// to link to edit.js
+const edit = require("./edit");
+
 // define possible actions to take
 const actions = 
     {
@@ -101,6 +108,22 @@ const addRole = [
         name: 'addRole',
     },
 ]
+const updateDepartment = [
+    {
+        type: 'list',
+        message: 'What would you like to update about this employee?',
+        choices: [ 'First Name', 'Last Name', 'Manager', 'Role', 'Department', ],
+        name: 'updateEmployee',
+    },
+]
+const updateRole = [
+    {
+        type: 'list',
+        message: 'What would you like to update about this employee?',
+        choices: [ 'First Name', 'Last Name', 'Manager', 'Role', 'Department', ],
+        name: 'updateEmployee',
+    },
+]
 const updateEmployee = [
     {
         type: 'list',
@@ -134,6 +157,20 @@ const updateEmployeeManager = [
     },
 ]
 const removeEmployee = [
+    {
+        type: 'list',
+        message: 'Employee removed from database.',
+        name: 'removeEmployee',
+    },
+]
+const removeRole = [
+    {
+        type: 'list',
+        message: 'Employee removed from database.',
+        name: 'removeEmployee',
+    },
+]
+const removeDepartment = [
     {
         type: 'list',
         message: 'Employee removed from database.',

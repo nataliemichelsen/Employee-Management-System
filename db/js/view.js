@@ -1,6 +1,3 @@
-// separate from edit.js but very similar
-// separate for organization / cleanness 
-
 // require general
 const inquirer = require("inquirer");
 const sql = require("./sql");
@@ -16,7 +13,6 @@ const edit = require("./edit");
 // insert methods for sql statements / searches / functions
     class viewMenu {
         constructor() {
-           // text used for SQL functions
            this.allEmployees = `
            SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id, role.title, role.salary, department.department 
            FROM employee 
