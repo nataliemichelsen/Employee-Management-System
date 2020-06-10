@@ -32,11 +32,11 @@ In this homework assignment, my challenge was to architect and build a solution 
   
 2. Build a command-line application that at a minimum allows the user to:
 
-  ✓ Add departments, roles, employees
+        ✓ Add departments, roles, employees
 
-  ✓ View departments, roles, employees
+        ✓ View departments, roles, employees
 
-  ✓ Update employee roles
+        ✓ Update employee roles
 
 ## **Bonus**
 
