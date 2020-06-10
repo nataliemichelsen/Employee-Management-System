@@ -1,15 +1,15 @@
-// require (might not need these here)
+// require general
+const inquirer = require("inquirer");
 const mysql = require("mysql");
 const path = require("path");
 const fs = require("fs");
 const util = require("util");
-
-// require (definitely need these)
-const inquirer = require("inquirer");
 // to link to server.js
 const questions = require("/server");
 // to link to constructor.js
-const constructors = require("./constructor")
+const constructors = require("./view");
+// to link to edit.js
+const edit = require("./edit");
 
 // create class with switch statement
 class mainMenu {
@@ -131,9 +131,5 @@ class mainMenu {
         }
     }
 }
-
-// create functions for each table operation (view, update, add, delete)
-// match functions to consts defined on server.js
-
 
 module.exports = new Menu();

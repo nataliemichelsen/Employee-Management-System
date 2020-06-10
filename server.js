@@ -1,4 +1,4 @@
-// require
+// require general
 const mysql = require("mysql");
 const path = require("path");
 const fs = require("fs");
