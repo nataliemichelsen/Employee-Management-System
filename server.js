@@ -36,7 +36,7 @@ const viewByDepartment = [
 const viewByRole = [
     {
         type: 'list',
-        choices: [ 'Leader - 1', 'Assistant - 2', 'Team Member - 3', 'Manager - 4', 'Assistant Manager - 5' ],
+        choices: [ 'Assistant - 1', 'Team Member - 2', 'Manager - 3', 'Assistant Manager - 4' ],
         message: 'You are viewing all employees by role.',
     },
 ]
@@ -44,7 +44,7 @@ const viewByManager = [
     {
         type: 'list',
         choices: [ 'Jackie Brown', 'Clarice Starling', 'Dorothy Gale', 'Scarlett O`Hara' ],
-        message: 'You are viewing all employees by role.',
+        message: 'You are viewing all managers. Please select a manager to view their employees.',
     },
 ]
 const addEmployee = [
