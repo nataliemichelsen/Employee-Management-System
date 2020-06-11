@@ -1,16 +1,14 @@
 // require general
 const inquirer = require("inquirer");
-const mysql = require("mysql");
 const path = require("path");
-const util = require("util");
 
 // links
-const questions = require("../../server");
-const db = require("../../db");
+const questions = require("../server");
+const db = require(".");
 
 // create class with switch statement
 class mainMenu {
-    viewHandler(viewMenu) {
+    view(viewMenu) {
         // move this inside the function within the class
         // create cases for each required option >>>>
         switch (viewMenu) {
@@ -58,7 +56,7 @@ class mainMenu {
 
     // update tables (department, role, employee)
     // pull data from constructors.js
-    updateHandler(updateSelected) {
+    update(updateSelected) {
         switch (updateSelected) {
             case "Update Employee":
                 return constructors.updateEmployee().then((data) => {
@@ -82,7 +80,7 @@ class mainMenu {
 
     // add tables (department, role, employee)
     // pull data from constructors.js
-    addHandler(addSelected) {
+    add(addSelected) {
         switch (addSelected) {
             case "Add Employee":
                 return constructors.addEmployee().then((data) => {
@@ -106,7 +104,7 @@ class mainMenu {
 
     // delete tables (department, role, employee)
     // pull data from constructors.js
-    removeHandler(removeSelected) {
+    remove(removeSelected) {
         switch (removeSelected) {
             case "Remove Employee":
                 return constructors.deleteEmployee().then((data) => {
