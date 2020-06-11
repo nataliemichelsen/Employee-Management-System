@@ -1,16 +1,9 @@
 // require general
-const mysql = require("mysql");
-const path = require("path");
-const fs = require("fs");
 const inquirer = require("inquirer");
-const util = require("util");
 
-// to link to index.js
-const index = require("./index");
-// to link to server.js
-const questions = require("/server");
-// to link to edit.js
-const edit = require("./edit");
+// links
+const db = require("./db");
+require("console.table");
 
 // define possible actions to take
 const actions = 

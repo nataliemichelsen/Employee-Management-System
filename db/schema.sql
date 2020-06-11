@@ -25,6 +25,7 @@ CREATE TABLE role (
 );
 
 CREATE TABLE employee (
+    id INT auto_increment NOT NULL,
     -- // to hold employee first name
     first_name VARCHAR(14) NOT NULL,
     -- // to hold employee last name

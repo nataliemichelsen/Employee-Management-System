@@ -1,5 +1,6 @@
 // connection.mysql connect
 const mysql = require("mysql");
+const util = require("util");
 
 // create connection with root info
 // match to seed & schema

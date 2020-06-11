@@ -2,15 +2,11 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const path = require("path");
-const fs = require("fs");
 const util = require("util");
 
-// to link to server.js
-const questions = require("/server");
-// to link to constructor.js
-const constructors = require("./view");
-// to link to edit.js
-const edit = require("./edit");
+// links
+const questions = require("../../server");
+const db = require("../../db");
 
 // create class with switch statement
 class mainMenu {
