@@ -49,3 +49,5 @@ In this homework assignment, my challenge was to architect and build a solution 
         ✗ View the total utilized budget of a department -- ie the combined salaries of all employees in that department 
 
 ## **Video of Deployed Application**
+
+![Deployed Application]()
