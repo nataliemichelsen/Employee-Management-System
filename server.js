@@ -215,13 +215,14 @@ loadPrompt = async () => {
     }
 }
 
-// pulling const from server.js & adding return functionality for data
+// view by all employees
 async function viewAllEmployees() {
     return this.allEmployees().then((data) => {
         return this.renderAllEmployees(data);
     });
 }
 
+// view by department
 async function viewByDepartment() {
     return this.viewByDepartment().then((inquiry) => {
         return inquirer.prompt([inquiry]).then((data) => {
@@ -235,6 +236,7 @@ async function viewByDepartment() {
     });
 }
 
+// view by assigned manager
 async function viewByManager() {
     return this.allManagers().then((inquiry) => {
         return inquirer.prompt([inquiry]).then((data) => {
@@ -246,6 +248,7 @@ async function viewByManager() {
     });
 }
 
+// create / add new employee to employee table
 async function addEmployee() {
     const roles = await db.findAllRoles()
     const employees = await db.findAllEmployees()
@@ -262,17 +265,17 @@ async function addEmployee() {
         },
     ])
     const roleChoices = roles.map(({ id, title }) => ({
-        name: title, 
+        name: title,
         value: id
     }));
-    const {roleId} = await inquirer.prompt(updateEmployeeRole)
+    const { roleId } = await inquirer.prompt(updateEmployeeRole)
     employeeQuestion.role_id = roleId
     const managerChoices = employees.map(({ id, first_name, last_name }) => ({
         name: `${first_name} ${last_name}`,
         value: id
     }));
-    managerChoices.unshift({ name:"none", value: "null" })
-    const {managerId} = await inquirer.prompt([
+    managerChoices.unshift({ name: "none", value: "null" })
+    const { managerId } = await inquirer.prompt([
         {
             type: 'list',
             message: 'Who is the manager of the employee you want to add?',
@@ -283,26 +286,128 @@ async function addEmployee() {
     ])
 }
 
-async function addRole()
+// create / add new role to role table
+async function addRole() {
+    return this.createRole().then((data) => {
+        var inputs = [data.title, data.salary, data.department_id];
+        return sql.insert(this.addRole, inputs).then(function (res) {
+            return res;
+        });
+    });
+}
 
-async function addDepartment()
+// create / add new department to department table
+async function addDepartment() {
+    return inquirer.prompt([q.department]).then((data) => {
+        return sql
+            .insert(this.addDepartment, [data.department])
+            .then(function (res) {
+                return res;
+            });
+    });
+}
 
-async function updateEmployee()
+// update / make changes to employee table
+async function updateEmployee() {
+    return this.getEmployeeList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            const employeeID = parseInt(arr[0]);
+            return this.createEmployee().then((data) => {
+                var inputs = [
+                    data.first_name,
+                    data.last_name,
+                    data.role_id,
+                    data.manager_id,
+                    data.manager_status,
+                    employeeID,
+                ];
+                const reports = [...data.reports];
+                return sql.update(this.updateEmployee, inputs).then((res) => {
+                    for (let i = 0; i < reports.length; i++) {
+                        sql.update(this.updateEmployeeManager, [empID, reports[i]]);
+                    }
+                });
+            });
+        });
+    });
+}
 
-async function updateRole()
+// update / make changes to roles table
+async function updateRole() {
+    return this.getRoleList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            const roleID = parseInt(arr[0]);
+            return this.createRole().then((data) => {
+                var inputs = [data.title, data.salary, data.department_id, roleID];
+                return sql.update(this.updateRoleText, inputs).then((res) => {
+                    return res;
+                });
+            });
+        });
+    });
+}
 
-async function updateDepartment()
+// update / make changes to department table
+async function updateDepartment() {
+    return this.getDeptList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            const deptID = parseInt(arr[0]);
+            return this.createDepartment().then((data) => {
+                return sql
+                    .update(this.updateDeptText, [data.department, deptID])
+                    .then((res) => {
+                        return res;
+                    });
+            });
+        });
+    });
+}
 
+// update assigned manager
 async function updateManager()
 
-async function deleteEmployee()
+// removes selected employee
+async function deleteEmployee() {
+    return this.getEmployeeList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            return sql
+                .delete(this.deleteEmployee, [parseInt(arr[0])])
+                .then((res) => {
+                    return res;
+                });
+        });
+    });
+}
 
-async function deleteRole()
+// removes selected role
+async function deleteRole() {
+    return this.getRoleList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            return sql.delete(this.deleteRole, [parseInt(arr[0])]).then((res) => {
+                return res;
+            });
+        });
+    });
+}
 
-async function deleteDepartment()
-
-async function deleteEmployee()
-
+// removes selected department
+async function deleteDepartment() {
+    return this.getDepartmentList().then((inquiry) => {
+        return inquirer.prompt([inquiry]).then((data) => {
+            var arr = data.answer.split(" ");
+            return sql
+                .delete(this.deleteDepartment, [parseInt(arr[0])])
+                .then((res) => {
+                    return res;
+                });
+        });
+    });
+}
 
 // calling the init function so the app runs
 init()
