@@ -33,40 +33,7 @@
       );
     });
   }
-
-  // pulling const from server.js & adding return functionality for data
-  viewAllEmployees() {
-    return this.allEmployees().then((data) => {
-      return this.renderAllEmployees(data);
-    });
-  }
-
-  // pulling const from server.js & adding return functionality for data
-  viewByDepartment() {
-    return this.viewByDepartment().then((inquiry) => {
-      return inquirer.prompt([inquiry]).then((data) => {
-        var arr = data.answer.split(" ");
-        return sql
-        .search(this.viewByDepartment, [parseInt(arr[0])])
-        .then((data) => {
-            return this.renderAllEmployees(data);
-          });
-      });
-    });
-  }
-
-  // pulling const from server.js & adding return functionality for data
-  viewByManager() {
-    return this.allManagers().then((inquiry) => {
-      return inquirer.prompt([inquiry]).then((data) => {
-        var arr = data.answer.split(" ");
-        return sql.search(this.allManagers, [parseInt(arr[0])]).then((data) => {
-          return this.renderAllEmployees(data);
-        });
-      });
-    });
-  }
-
+  
   // returns list of all roles
   viewAllRoles() {
     return SQL.search(this.allRolesText);
