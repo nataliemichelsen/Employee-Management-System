@@ -13,6 +13,8 @@ const actions =
         'View All Employees by Department',
         'View All Employees by Manager',
         'Add Employee',
+        'Add Role',
+        'Add Department',
         'Update Employee',
         'Update Employee Roles',
         'Update Employee Manager',
@@ -125,49 +127,49 @@ const updateEmployee = [
         name: 'updateEmployee',
     },
 ]
-const updateEmployeeRole = [
+const updateRole = [
     {
         type: 'list',
         message: 'What role would you like this employee to have?',
         choices: ['Leader - 1', 'Assistant - 2', 'Team Member - 3', 'Manager - 4', 'Assistant Manager - 5'],
-        name: 'updateEmployeeRole',
+        name: 'updateRole',
     },
 ]
-const updateEmployeeDepartment = [
+const updateDepartment = [
     {
         type: 'list',
         message: 'What department would you like this employee to have?',
         choices: ['Sales', 'Service', 'Research', 'Janitorial'],
-        name: 'updateEmployeeDepartment',
+        name: 'updateDepartment',
     },
 ]
-const updateEmployeeManager = [
+const updateManager = [
     {
         type: 'list',
         message: 'What manager would you like this employee to have?',
         choices: ['Jackie Brown', 'Clarice Starling', 'Dorothy Gale', 'Scarlett O`Hara'],
-        name: 'updateEmployeeManager',
+        name: 'updateManager',
     },
 ]
-const removeEmployee = [
+const deleteEmployee = [
     {
         type: 'list',
         message: 'Employee removed from database.',
-        name: 'removeEmployee',
+        name: 'deleteEmployee',
     },
 ]
-const removeRole = [
+const deleteRole = [
     {
         type: 'list',
         message: 'Employee removed from database.',
-        name: 'removeEmployee',
+        name: 'deleteRole',
     },
 ]
-const removeDepartment = [
+const deleteDepartment = [
     {
         type: 'list',
         message: 'Employee removed from database.',
-        name: 'removeEmployee',
+        name: 'deleteDepartment',
     },
 ]
 
@@ -190,6 +192,12 @@ loadPrompt = async () => {
             return viewByManager()
             break;
         case 'Add Employee':
+            return addEmployee()
+            break;
+        case 'Add Role':
+            return addEmployee()
+            break;
+        case 'Add Department':
             return addEmployee()
             break;
         case 'Update Employee':
@@ -275,7 +283,26 @@ async function addEmployee() {
     ])
 }
 
+async function addRole()
+
+async function addDepartment()
+
+async function updateEmployee()
+
+async function updateRole()
+
+async function updateDepartment()
+
+async function updateManager()
+
 async function deleteEmployee()
+
+async function deleteRole()
+
+async function deleteDepartment()
+
+async function deleteEmployee()
+
 
 // calling the init function so the app runs
 init()
