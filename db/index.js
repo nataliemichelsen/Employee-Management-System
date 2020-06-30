@@ -127,4 +127,4 @@ class mainMenu {
     }
 }
 
-module.exports = new Menu();
+module.exports = new mainMenu();

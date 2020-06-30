@@ -323,7 +323,7 @@ async function addDepartment() {
 
 // update / make changes to employee table
 async function updateEmployee() {
-    const employee = await db.updateEmployee()
+    const employees = await db.updateEmployee()
     const employeeChoices = employee.map(({ employee_id }) => ({
         value: employee_id
     }));
@@ -354,7 +354,7 @@ async function updateRole() {
             choices: roleChoices
         },
     ]);
-    const role = await db.updateRole(role_id)
+    const employee = await db.updateRole(role_id)
     console.table(role)
     loadPrompt()
 }
@@ -373,7 +373,7 @@ async function updateDepartment() {
             choices: departmentChoices
         },
     ]);
-    const department = await db.updateDepartment(department_id)
+    const employee = await db.updateDepartment(department_id)
     console.table(department)
     loadPrompt()
 }
@@ -392,14 +392,14 @@ async function updateManager() {
             choices: managerChoices
         },
     ]);
-    const manager = await db.updateManager(manager_id)
+    const employee = await db.updateManager(manager_id)
     console.table(manager)
     loadPrompt()
 }
 
 // removes selected employee
 async function deleteEmployee() {
-    const employee = await db.removeEmployee()
+    const employees = await db.removeEmployee()
     const employeeChoices = employee.map(({ employee_id }) => ({
         value: employee_id
     }));
@@ -430,7 +430,7 @@ async function deleteRole() {
             choices: roleChoices
         },
     ]);
-    const role = await db.removeRole(role_id)
+    const employee = await db.removeRole(role_id)
     console.table(role)
     loadPrompt()
 }
@@ -449,7 +449,7 @@ async function deleteDepartment() {
             choices: departmentChoices
         },
     ]);
-    const department = await db.removeDepartment(department_id)
+    const employee = await db.removeDepartment(department_id)
     console.table(department)
     loadPrompt()
 }
