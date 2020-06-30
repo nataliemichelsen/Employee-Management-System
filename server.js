@@ -380,50 +380,78 @@ async function updateDepartment() {
 
 // update assigned manager
 async function updateManager() {
-
+    const manager = await db.updateManager()
+    const managerChoices = manager.map(({ manager_id }) => ({
+        value: manager_id
+    }));
+    const { manager_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which manager would you like to update?',
+            name: 'manager_id',
+            choices: managerChoices
+        },
+    ]);
+    const manager = await db.updateManager(manager_id)
+    console.table(manager)
+    loadPrompt()
 }
 
 // removes selected employee
 async function deleteEmployee() {
-
-    // return this.getEmployeeList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         return sql
-    //             .delete(this.deleteEmployee, [parseInt(arr[0])])
-    //             .then((res) => {
-    //                 return res;
-    //             });
-    //     });
-    // });
+    const employee = await db.removeEmployee()
+    const employeeChoices = employee.map(({ employee_id }) => ({
+        value: employee_id
+    }));
+    const { employee_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which employee would you like to remove?',
+            name: 'employee_id',
+            choices: employeeChoices
+        },
+    ]);
+    const employee = await db.removeEmployee(employee_id)
+    console.table(employee)
+    loadPrompt()
 }
 
 // removes selected role
 async function deleteRole() {
-
-    // return this.getRoleList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         return sql.delete(this.deleteRole, [parseInt(arr[0])]).then((res) => {
-    //             return res;
-    //         });
-    //     });
-    // });
+    const role = await db.removeRole()
+    const roleChoices = role.map(({ role_id }) => ({
+        value: role_id
+    }));
+    const { role_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which role would you like to remove?',
+            name: 'role_id',
+            choices: roleChoices
+        },
+    ]);
+    const role = await db.removeRole(role_id)
+    console.table(role)
+    loadPrompt()
 }
 
 // removes selected department
 async function deleteDepartment() {
-
-    // return this.getDepartmentList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         return sql
-    //             .delete(this.deleteDepartment, [parseInt(arr[0])])
-    //             .then((res) => {
-    //                 return res;
-    //             });
-    //     });
-    // });
+    const department = await db.removeDepartment()
+    const departmentChoices = department.map(({ department_id }) => ({
+        value: department_id
+    }));
+    const { department_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which department would you like to remove?',
+            name: 'department_id',
+            choices: departmentChoices
+        },
+    ]);
+    const department = await db.removeDepartment(department_id)
+    console.table(department)
+    loadPrompt()
 }
 
 // calling the init function so the app runs

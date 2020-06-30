@@ -33,7 +33,7 @@ VALUES
     (6, "Criminal Assistant Manager", 1000000, 4),
     (7, "General Assistant Manager", 1000000, 4),
     (8, "Customer Service Team Member", 50000, 2),
-    (9, "Assistant to Dorothy Gale", 20000 1);
+    (9, "Assistant to Dorothy Gale", 20000, 1);
 
 --   // define enough for a good working list
 --   // match to choices defined on server.js
