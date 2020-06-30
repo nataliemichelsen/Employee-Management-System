@@ -23,6 +23,9 @@ class DB {
     removeEmployee(employee_id) {
         return this.connection.query("DELETE FROM employee WHERE id=?", employee_id)
     }
+    updateEmployee(employee_id) {
+        return this.connection.query("UPDATE employee SET employee_id=? WHERE id=?", [ employee_id ])
+    }
     updateEmployeeRole(employee_id, role_id) {
         return this.connection.query("UPDATE employee SET role_id=? WHERE id=?", [ role_id, employee_id ])
     }

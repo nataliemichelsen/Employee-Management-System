@@ -279,6 +279,8 @@ async function addEmployee() {
         },
         employeeQuestion.manager_id = managerId
     ])
+    console.table(employees)
+    loadPrompt()
 }
 
 // create / add new role to role table
@@ -321,64 +323,59 @@ async function addDepartment() {
 
 // update / make changes to employee table
 async function updateEmployee() {
-
-    // return this.getEmployeeList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         const employeeID = parseInt(arr[0]);
-    //         return this.createEmployee().then((data) => {
-    //             var inputs = [
-    //                 data.first_name,
-    //                 data.last_name,
-    //                 data.role_id,
-    //                 data.manager_id,
-    //                 data.manager_status,
-    //                 employeeID,
-    //             ];
-    //             const reports = [...data.reports];
-    //             return sql.update(this.updateEmployee, inputs).then((res) => {
-    //                 for (let i = 0; i < reports.length; i++) {
-    //                     sql.update(this.updateEmployeeManager, [empID, reports[i]]);
-    //                 }
-    //             });
-    //         });
-    //     });
-    // });
+    const employee = await db.updateEmployee()
+    const employeeChoices = employee.map(({ employee_id }) => ({
+        value: employee_id
+    }));
+    const { employee_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which employee would you like to update?',
+            name: 'employee_id',
+            choices: employeeChoices
+        },
+    ]);
+    const employee = await db.updateEmployee(employee_id)
+    console.table(employee)
+    loadPrompt()
 }
 
 // update / make changes to roles table
 async function updateRole() {
-
-    // return this.getRoleList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         const roleID = parseInt(arr[0]);
-    //         return this.createRole().then((data) => {
-    //             var inputs = [data.title, data.salary, data.department_id, roleID];
-    //             return sql.update(this.updateRoleText, inputs).then((res) => {
-    //                 return res;
-    //             });
-    //         });
-    //     });
-    // });
+    const role = await db.updateRole()
+    const roleChoices = role.map(({ role_id }) => ({
+        value: role_id
+    }));
+    const { role_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which role would you like to update?',
+            name: 'role_id',
+            choices: roleChoices
+        },
+    ]);
+    const role = await db.updateRole(role_id)
+    console.table(role)
+    loadPrompt()
 }
 
 // update / make changes to department table
 async function updateDepartment() {
-
-    // return this.getDeptList().then((inquiry) => {
-    //     return inquirer.prompt([inquiry]).then((data) => {
-    //         var arr = data.answer.split(" ");
-    //         const deptID = parseInt(arr[0]);
-    //         return this.createDepartment().then((data) => {
-    //             return sql
-    //                 .update(this.updateDeptText, [data.department, deptID])
-    //                 .then((res) => {
-    //                     return res;
-    //                 });
-    //         });
-    //     });
-    // });
+    const department = await db.updateDepartment()
+    const departmentChoices = department.map(({ department_id }) => ({
+        value: department_id
+    }));
+    const { department_id } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'Which department would you like to update?',
+            name: 'department_id',
+            choices: departmentChoices
+        },
+    ]);
+    const department = await db.updateDepartment(department_id)
+    console.table(department)
+    loadPrompt()
 }
 
 // update assigned manager
