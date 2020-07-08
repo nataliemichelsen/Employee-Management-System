@@ -1,130 +1,55 @@
-// require general
-const inquirer = require("inquirer");
-const path = require("path");
+const connection = require("./connection");
 
-// links
-const questions = require("../server");
-const db = require(".");
-
-// create class with switch statement
-class mainMenu {
-    view(viewMenu) {
-        // move this inside the function within the class
-        // create cases for each required option >>>>
-        switch (viewMenu) {
-            case 'View All Employees':
-                return constructors.viewAllEmployees().then((data) => {
-                    console.log(data.result);
-                    return data;
-                });
-                break;
-            // copy from above & edit var/name only 
-            case 'View All Employees by Department':
-                return constructors.viewEmployeeDepartment().then((data) => {
-                    console.log(data.result);
-                    return data;
-                });
-                break;
-            // copy from above & edit var/name only 
-            case 'View All Employees by Manager':
-                return constructors.viewEmployeeManager().then((data) => {
-                    console.log(data.result);
-                    return data;
-                });
-                break;
-            // copy from above & edit var/name only 
-            case 'View All Employees by Role':
-                return constructors.viewEmployeeRole().then((data) => {
-                    console.log(data.result);
-                    return data;
-                });
-                break;
-            // copy from above & edit var/name only 
-            case 'View All Roles':
-                return constructors.viewAllRoles().then((data) => {
-                    console.log(data.result);
-                    return data;
-                });
-                break;
-            default:
-                console.log("No Default")
-        }
+// consolidating class & functions
+class DB {
+    constructor(connection) {
+        this.connection = connection
     }
-
-    // move this inside class object
-    // switch statements for each table function (update, add, delete - no view needed) >>>>
-
-    // update tables (department, role, employee)
-    // pull data from constructors.js
-    update(updateSelected) {
-        switch (updateSelected) {
-            case "Update Employee":
-                return constructors.updateEmployee().then((data) => {
-                    return data;
-                });
-                break;
-            case "Update Role":
-                return constructors.updateRole().then((data) => {
-                    return data;
-                });
-                break;
-            case "Update Department":
-                return constructors.updateDepartment().then((data) => {
-                    return data;
-                });
-                break;
-            default:
-                console.log("No Default")
-        }
+    addEmployee(employee) {
+        return this.connection.query("INSERT INTO employee SET ? ", employee)
     }
-
-    // add tables (department, role, employee)
-    // pull data from constructors.js
-    add(addSelected) {
-        switch (addSelected) {
-            case "Add Employee":
-                return constructors.addEmployee().then((data) => {
-                    return data;
-                });
-                break;
-            case "Add Role":
-                return constructors.addRole().then((data) => {
-                    return data;
-                });
-                break;
-            case "Add Department":
-                return constructors.addDepartment().then((data) => {
-                    return data;
-                });
-                break;
-            default:
-                console.log("No Default")
-        }
+    addRole(role) {
+        return this.connection.query("INSERT INTO role SET ? ", role)
     }
-
-    // delete tables (department, role, employee)
-    // pull data from constructors.js
-    remove(removeSelected) {
-        switch (removeSelected) {
-            case "Remove Employee":
-                return constructors.deleteEmployee().then((data) => {
-                    return data;
-                });
-                break;
-            case "Remove Role":
-                return constructors.deleteRole().then((data) => {
-                    return data;
-                });
-                break;
-            case "Remove Department":
-                return constructors.deleteDepartment().then((data) => {
-                    return data;
-                });
-                break;
-            default:
-                console.log("No Default")
-        }
+    addDepartment(department) {
+        return this.connection.query("INSERT INTO department SET ? ", department)
+    }
+    removeRole(role_id) {
+        return this.connection.query("DELETE FROM role WHERE id=?", role_id)
+    }
+    removeDepartment(department_id) {
+        return this.connection.query("DELETE FROM role WHERE id=?", department_id)
+    }
+    removeEmployee(employee_id) {
+        return this.connection.query("DELETE FROM employee WHERE id=?", employee_id)
+    }
+    updateEmployee(employee_id) {
+        return this.connection.query("UPDATE employee SET employee_id=? WHERE id=?", [ employee_id ])
+    }
+    updateEmployeeRole(employee_id, role_id) {
+        return this.connection.query("UPDATE employee SET role_id=? WHERE id=?", [ role_id, employee_id ])
+    }
+    updateEmployeeManager(employee_id, manager_id) {
+        return this.connection.query("UPDATE employee SET manager_id=? WHERE id=?", [ manager_id, employee_id ])
+    }
+    updateEmployeeDepartment(employee_id, department_id) {
+        return this.connection.query("UPDATE employee SET department_id=? WHERE id=?", [ department_id, employee_id ])
+    }
+    findAllEmployees() {
+        return this.connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name AS department, role.salary AS manager FROM employee LEFT JOIN role ON employee.role_id=role.id LEFT JOIN department ON role.department_id=department.id")
+    }
+    findAllDepartments() {
+        return this.connection.query("SELECT department.id, department.name, SUM (role.salary) AS utilize_budget FROM employee LEFT JOIN role ON employee.role_id=role.id LEFT JOIN department ON role.department_id=department_id GROUP BY department.id, department.department_name")
+    }
+    findAllEmployeesByDepartment(department_id) {
+        return this.connection.query("SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role ON employee.role_id=role.id LEFT JOIN department department ON role.department_id=department.id WHERE department.id= ?", department_id)
+    }
+    findAllEmployeesByManager(manager_id) {
+        return this.connection.query("SELECT employee.id, employee.first_name, employee.last_name, department.name AS department, role.title FROM employee LEFT JOIN role ON role.id=employee.role_id LEFT JOIN department ON department.id=role.department_id WHERE manager_id= ?", manager_id)
+    }
+    findAllRoles() {
+        return this.connection.query("SELECT role.id, role.title, department.department_name AS department, role.salary FROM role LEFT JOIN department ON role.department_id=department.id")
     }
 }
 
-module.exports = new mainMenu();
+module.exports = new DB(connection)

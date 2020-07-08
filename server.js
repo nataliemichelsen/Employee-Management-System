@@ -7,20 +7,22 @@ require("console.table");
 
 // define possible actions to take
 const actions =
-{
-    type: 'list',
-    choices: ['View All Employees',
-        'View All Employees by Department',
-        'View All Employees by Manager',
-        'Add Employee',
-        'Add Role',
-        'Add Department',
-        'Update Employee',
-        'Update Employee Roles',
-        'Update Employee Manager',
-        'Remove Employee'],
-    name: 'actions',
-}
+[
+    {
+        type: 'list',
+        choices: ['View All Employees',
+            'View All Employees by Department',
+            'View All Employees by Manager',
+            'Add Employee',
+            'Add Role',
+            'Add Department',
+            'Update Employee',
+            'Update Employee Roles',
+            'Update Employee Manager',
+            'Remove Employee'],
+        name: 'actions',
+    }
+]
 
 // define const that holds all management options
 const allEmployees = [
@@ -167,41 +169,35 @@ loadPrompt = async () => {
     const { choice } = await inquirer.prompt(actions)
     switch (choice) {
         case 'View All Employees':
+            console.log("switchCase")
             return viewAllEmployees()
-            break;
         case 'View All Employees by Department':
             return viewByDepartment()
-            break;
         case 'View All Employees by Manager':
             return viewByManager()
-            break;
         case 'Add Employee':
             return addEmployee()
-            break;
         case 'Add Role':
             return addRole()
-            break;
         case 'Add Department':
             return addDepartment()
-            break;
         case 'Update Employee':
             return updateEmployee()
-            break;
         case 'Update Employee Roles':
             return updateRole()
-            break;
         case 'Update Employee Manager':
             return updateManager()
-            break;
         case 'Remove Employee':
             return deleteEmployee()
-            break;
     }
 }
 
 // view by all employees
 async function viewAllEmployees() {
     const employees = await db.findAllEmployees()
+    const employeeList = employees.map(({ id, name }) => ({
+        name: name, value: id
+    }));
     console.table(employees)
 }
 
