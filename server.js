@@ -174,19 +174,19 @@ async function loadPrompt() {
         choices: [{
             name: 'whatever',
             value: 'hey'
-        }
+        },
         {
             name: '1',
             value: 'fdsaadf'
-        }
+        },
         {
             name: 'whateve2r',
             value: 'fsda'
-        }
+        },
         {
             name: '3',
             value: 'fds'
-        }
+        },
         {
             name: '4',
             value: 'sd'
