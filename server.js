@@ -166,16 +166,16 @@ const init = async () => {
 }
 
 async function loadPrompt() {
-    // const { choice } = await inquirer.prompt(actions)
-    const {choice} = await inquirer.prompt([{
-        type: 'list',
-        name: 'choice',
-        message: 'what would you like to do?',
-        choices: [{
-            name: 'whatever',
-            value: 'hey'
-        }]
-    }])
+    const { choice } = await inquirer.prompt(actions)
+    // const {choice} = await inquirer.prompt([{
+    //     type: 'list',
+    //     name: 'choice',
+    //     message: 'what would you like to do?',
+    //     choices: [{
+    //         name: 'whatever',
+    //         value: 'hey'
+    //     }]
+    // }])
     switch (choice) {
         case 'View All Employees':
             console.log("switchCase")
