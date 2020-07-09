@@ -20,7 +20,7 @@ const actions =
             'Update Employee Roles',
             'Update Employee Manager',
             'Remove Employee'],
-        name: 'actions',
+        name: 'choice',
     }
 ]
 
@@ -165,30 +165,49 @@ const init = async () => {
     loadPrompt()
 }
 
-loadPrompt = async () => {
-    const { choice } = await inquirer.prompt(actions)
+async function loadPrompt() {
+    // const { choice } = await inquirer.prompt(actions)
+    const {choice} = await inquirer.prompt([{
+        type: 'list',
+        name: 'choice',
+        message: 'what would you like to do?',
+        choices: [{
+            name: 'whatever',
+            value: 'hey'
+        }]
+    }])
     switch (choice) {
         case 'View All Employees':
             console.log("switchCase")
             return viewAllEmployees()
+            break
         case 'View All Employees by Department':
             return viewByDepartment()
+            break
         case 'View All Employees by Manager':
             return viewByManager()
+            break
         case 'Add Employee':
             return addEmployee()
+            break
         case 'Add Role':
             return addRole()
+            break
         case 'Add Department':
             return addDepartment()
+            break
         case 'Update Employee':
             return updateEmployee()
+            break
         case 'Update Employee Roles':
             return updateRole()
+            break
         case 'Update Employee Manager':
             return updateManager()
+            break
         case 'Remove Employee':
             return deleteEmployee()
+            break
     }
 }
 
@@ -451,4 +470,4 @@ async function deleteDepartment() {
 }
 
 // calling the init function so the app runs
-init()
+loadPrompt()
