@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // links
-const db = require("./db");
+// const db = require("./db");
 require("console.table");
 
 // define possible actions to take
