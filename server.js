@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 
 // links
-// const db = require("./db");
+const db = require("./db");
 require("console.table");
 
 // define possible actions to take
@@ -166,42 +166,28 @@ const init = async () => {
 }
 
 async function loadPrompt() {
-    // const { choice } = await inquirer.prompt(actions)
-    const {choice} = await inquirer.prompt([{
-        type: 'list',
-        name: 'choice',
-        message: 'What would you like to do?',
-        choices: [{
-            name: 'whatever',
-            value: 'hey'
-        },
-        {
-            name: '1',
-            value: 'fdsaadf'
-        },
-        {
-            name: 'whateve2r',
-            value: 'fsda'
-        },
-        {
-            name: '3',
-            value: 'fds'
-        },
-        {
-            name: '4',
-            value: 'sd'
-        }
-    ]
-    }])
+    const { choice } = await inquirer.prompt(actions)
     switch (choice) {
         case 'View All Employees':
-            console.log("switchCase")
+            console.log("Marsha Legg")
+            console.log("Libby Switch")
+            console.log("Paula Hoit")
+            console.log("Debbie Want")
+            console.log("Jackson Fri")
             return viewAllEmployees()
             break
         case 'View All Employees by Department':
             return viewByDepartment()
+            console.log("Sales")
+            console.log("Service")
+            console.log("Retail")
+            console.log("Janitorial")
             break
         case 'View All Employees by Manager':
+            console.log("Scarlett O'Hara")
+            console.log("Jackie Brown")
+            console.log("Clarise Starling")
+            console.log("Dorothy Gale")
             return viewByManager()
             break
         case 'Add Employee':
@@ -235,6 +221,7 @@ async function viewAllEmployees() {
         name: name, value: id
     }));
     console.table(employees)
+    loadPrompt()
 }
 
 // view by department
@@ -295,7 +282,16 @@ async function addEmployee() {
         name: title,
         value: id
     }));
-    const { roleId } = await inquirer.prompt(updateEmployeeRole)
+    roleChoices.unshift({ name: "none", value: "null" })
+    const { roleId } = await inquirer.prompt([
+        {
+            type: 'list',
+            message: 'What is the role of this employee?',
+            choices: roleChoices,
+            name: 'role_id',
+        },
+        employeeQuestion.role_id = roleId
+    ])
     employeeQuestion.role_id = roleId
     const managerChoices = employees.map(({ id, first_name, last_name }) => ({
         name: `${first_name} ${last_name}`,

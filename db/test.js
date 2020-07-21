@@ -3,8 +3,8 @@ const inquirer = require("inquirer");
 const path = require("path");
 
 // links
-const questions = require("../../server");
-const db = require("../../db");
+const questions = require("../server");
+const db = require(".");
 
 // create class with switch statement
 class mainMenu {
