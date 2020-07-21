@@ -50,4 +50,4 @@ In this homework assignment, my challenge was to architect and build a solution 
 
 ## **Video of Deployed Application**
 
-![Deployed Application](images/working_app.gif) 
+![Deployed Application](assets/images/working_app.gif) 
